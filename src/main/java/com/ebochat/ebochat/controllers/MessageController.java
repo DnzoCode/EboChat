@@ -1,43 +1,30 @@
 package com.ebochat.ebochat.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.DestinationVariable;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.ebochat.ebochat.Request.ChatMessage;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.ebochat.ebochat.models.MessageModel;
 import com.ebochat.ebochat.services.MessageService;
 
-@Controller
-@RequestMapping("/wsMessage")
+@RestController
+@RequestMapping("/message")
 public class MessageController {
     @Autowired
     private MessageService messageService;
 
-    @MessageMapping("/chat.sendMessage")
-    @SendTo("/topic/public")
-        public MessageModel sendMessage(@Payload MessageModel messagePayload) {
-        return messagePayload;
+    @GetMapping
+    public ArrayList<MessageModel> findAll(){
+        return this.messageService.getMessages();
     }
 
-    @MessageMapping("/chat.addUser")
-    @SendTo("/topic/public")
-    public MessageModel addUser(@Payload MessageModel chatMessage, SimpMessageHeaderAccessor headerAccessor) {
-        // Add username in web socket session
-        headerAccessor.getSessionAttributes().put("username", chatMessage.getDirection());
-        return chatMessage;
-    }
-
-    @MessageMapping("/chat/{roomId}")
-    @SendTo("/topic/{roomId}")
-    public ChatMessage handleChatMessage(@DestinationVariable String roomId, ChatMessage message) {
-        // Guardar el mensaje en la base de datos
-        // message.setCreationDate(LocalDateTime.now());
-        return new ChatMessage(message.getMessage(), message.getUser());
+    @GetMapping(path = "/chat/{chatId}")
+    public List<MessageModel> findMessagesByChatId(@PathVariable("chatId") Long chatId){
+        return this.messageService.findMessagesByChatId(chatId);
     }
 }

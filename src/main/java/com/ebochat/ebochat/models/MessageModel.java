@@ -1,9 +1,8 @@
 package com.ebochat.ebochat.models;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.*;
 
@@ -17,9 +16,6 @@ public class MessageModel {
     @Column
     private String content;
 
-    @Column
-    private String direction;
-
     @ManyToOne
     @JoinColumn(name= "user_id")
     private UserModel user;
@@ -31,12 +27,7 @@ public class MessageModel {
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", nullable = false, updatable = false)
-    private Date creationDate;
-
-    @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "updated_at", nullable = false, updatable = false)
-    private Date updateDate;
+    private LocalDateTime creationDate;
 
     public Long getId() {
         return id;
@@ -44,6 +35,14 @@ public class MessageModel {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public ChatModel getChat() {
+        return chat;
+    }
+
+    public void setChat(ChatModel chat) {
+        this.chat = chat;
     }
 
     public String getContent() {
@@ -62,36 +61,12 @@ public class MessageModel {
         this.user = user;
     }
 
-    public ChatModel getChat() {
-        return chat;
-    }
-
-    public void setChat(ChatModel chat) {
-        this.chat = chat;
-    }
-
-    public Date getCreationDate() {
+    public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
-    }
-
-    public Date getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
-    }
-
-    public String getDirection() {
-        return direction;
-    }
-
-    public void setDirection(String direction) {
-        this.direction = direction;
     }
 
     

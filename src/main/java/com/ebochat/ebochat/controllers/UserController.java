@@ -19,6 +19,7 @@ import com.ebochat.ebochat.services.UserService;
 public class UserController {
     @Autowired
     private UserService userService;
+    
     @GetMapping
     public ArrayList<UserModel> getUsers() {
         return this.userService.getUsers();

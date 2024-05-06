@@ -1,6 +1,7 @@
 package com.ebochat.ebochat.services;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,9 @@ public class MessageService {
     
     public MessageModel saveMessage(MessageModel message){
         return messageRepository.save(message);
+    }
+
+    public List<MessageModel> findMessagesByChatId(Long chatId){
+        return messageRepository.findByChatId(chatId);
     }
 }
