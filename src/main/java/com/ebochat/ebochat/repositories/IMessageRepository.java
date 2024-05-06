@@ -7,10 +7,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.ebochat.ebochat.Responses.MessageResponse;
 import com.ebochat.ebochat.models.MessageModel;
 
 public interface IMessageRepository extends JpaRepository<MessageModel, Long>{
 
-    @Query("SELECT m FROM MessageModel m WHERE m.chat.id = :chatId")
-    List<MessageModel> findByChatId(@Param("chatId") Long chatId);
+    @Query("SELECT new com.ebochat.ebochat.Responses.MessageResponse(m.content, u.username, u.id) FROM MessageModel m JOIN m.user u WHERE m.chat.id = :chatId")
+    List<MessageResponse> findByChatId(@Param("chatId") Long chatId);
 }

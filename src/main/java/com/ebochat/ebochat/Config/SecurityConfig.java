@@ -31,7 +31,7 @@ public class SecurityConfig {
               authRequest
                 .requestMatchers(HttpMethod.GET).permitAll()
                 .requestMatchers(HttpMethod.OPTIONS).permitAll()
-                .requestMatchers("/auth/**", "/chats/**").permitAll()
+                .requestMatchers("/auth/**", "/chats/**", "/message/**").permitAll()
                 .anyRequest().authenticated()
                 )
             .sessionManagement(sessionManager->

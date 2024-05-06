@@ -1,4 +1,4 @@
-package com.ebochat.ebochat.Responses;
+package com.ebochat.ebochat.Request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class AuthResponse {
-    String token; 
+@NoArgsConstructor
+public class CreateMessageRequest {
+    String content;
     Long userId;
-    String username;
+    Long chatId;
 }

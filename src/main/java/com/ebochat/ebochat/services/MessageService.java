@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ebochat.ebochat.Responses.MessageResponse;
 import com.ebochat.ebochat.models.MessageModel;
 import com.ebochat.ebochat.repositories.IMessageRepository;
 
@@ -27,7 +28,7 @@ public class MessageService {
         return messageRepository.save(message);
     }
 
-    public List<MessageModel> findMessagesByChatId(Long chatId){
+    public List<MessageResponse> findMessagesByChatId(Long chatId){
         return messageRepository.findByChatId(chatId);
     }
 }

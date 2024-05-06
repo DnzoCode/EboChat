@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthResponse {
-    String token; 
-    Long userId;
-    String username;
+public class ContactResponse {
+    private Long chatId;
+    private String otherUserName;
 }

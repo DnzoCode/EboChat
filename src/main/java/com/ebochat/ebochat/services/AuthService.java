@@ -1,5 +1,6 @@
 package com.ebochat.ebochat.services;
 
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,10 +25,13 @@ public class AuthService {
 
     public AuthResponse login(LoginRequest request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-        UserDetails user=userRepository.findByUsername(request.getUsername()).orElseThrow();
+        UserDetails user = userRepository.findByUsername(request.getUsername()).orElseThrow();
+        UserModel userModel = userRepository.findByUsername(request.getUsername()).orElseThrow();
         String token=jwtService.getToken(user);
         return AuthResponse.builder()
             .token(token)
+            .username(user.getUsername())
+            .userId(userModel.getId())
             .build();
 
     }

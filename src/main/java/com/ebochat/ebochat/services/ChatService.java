@@ -1,10 +1,12 @@
 package com.ebochat.ebochat.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ebochat.ebochat.Responses.ContactResponse;
 import com.ebochat.ebochat.Responses.CreateChatResponse;
 import com.ebochat.ebochat.models.ChatModel;
 import com.ebochat.ebochat.models.ChatUserModel;
@@ -25,6 +27,10 @@ public class ChatService {
 
     public Optional<ChatModel> findById(Long id){
         return this.chatRepository.findById(id);
+    }
+
+    public List<ContactResponse> findChatsByUserId(Long userId){
+        return this.chatUserService.findChatsByUserId(userId);
     }
 
     public CreateChatResponse saveChat(ChatModel chat, Long userId, Long userLoggedId){
