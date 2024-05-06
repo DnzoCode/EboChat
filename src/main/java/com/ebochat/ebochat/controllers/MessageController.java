@@ -16,7 +16,7 @@ import com.ebochat.ebochat.services.MessageService;
 @RequestMapping("/message")
 public class MessageController {
     @Autowired
-    private MessageService messageService;
+    MessageService messageService;
 
     @GetMapping
     public ArrayList<MessageModel> findAll(){

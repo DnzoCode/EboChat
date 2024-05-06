@@ -27,11 +27,13 @@ public class ChatService {
         return this.chatRepository.findById(id);
     }
 
-    public CreateChatResponse saveChat(ChatModel chat, Long userId){
+    public CreateChatResponse saveChat(ChatModel chat, Long userId, Long userLoggedId){
         CreateChatResponse createChatResponse = new CreateChatResponse();
         try {
             ChatModel newChat = this.chatRepository.save(chat);
             createChatResponse = this.addChatAndUser(newChat.getId(), userId);
+            createChatResponse = this.addChatAndUser(newChat.getId(), userLoggedId);
+
         } catch (Exception e) {
             createChatResponse.setError(true);
             createChatResponse.setResponse(e.getMessage());

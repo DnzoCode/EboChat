@@ -22,7 +22,7 @@ public class ChatController {
         ChatModel chatModel = new ChatModel();
         chatModel.setTypeChat(request.getTypeChat());
         CreateChatResponse createChatResponse = new CreateChatResponse();
-        createChatResponse = this.chatService.saveChat(chatModel, request.getUserId());
+        createChatResponse = this.chatService.saveChat(chatModel, request.getUserId(), request.getUserLoggedId());
         return createChatResponse;
     }
 }

@@ -12,7 +12,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ChatRequest {
-
     TypeChat typeChat;
     Long userId;
+    Long userLoggedId;
+
 }
